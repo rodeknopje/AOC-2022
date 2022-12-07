@@ -46,8 +46,7 @@ public class D05 : DayBase
 
         return 1;
     }
-
-
+    
     public override long Solve_2()
     {
         var stacks = InitializeStacks();

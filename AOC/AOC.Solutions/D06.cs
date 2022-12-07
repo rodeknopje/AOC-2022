@@ -3,7 +3,6 @@
 public class D06 : DayBase
 {
     protected override int Day => 6;
-
     public override long Solve_1() => GetFirstUniqueString(4);
     public override long Solve_2() => GetFirstUniqueString(14);
     
