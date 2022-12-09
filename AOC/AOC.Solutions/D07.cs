@@ -36,43 +36,45 @@ public class D07 : DayBase
     
     private long TraverseDirectories()
     {
-        long currentSize = 0;
+        long directorySize = 0;
 
         while (_lines.Any())
         {
             var line = _lines.First();
 
             _lines.RemoveAt(0);
-
+            
             if (new Regex("\\d").IsMatch(line))
             {
-                currentSize += Convert.ToInt64(line.Split(" ").First());
+                var fileSize = Convert.ToInt64(line.Split(" ").First());
+                
+                directorySize += fileSize;
 
-                _totalB += Convert.ToInt64(line.Split(" ").First());
+                _totalB += fileSize;
 
-                if (_lines.Any() == false && currentSize <= 100000)
+                if (_lines.Any() == false && directorySize <= 100000)
                 {
-                    _totalA += currentSize;
+                    _totalA += directorySize;
                 }
             }
             // if its a cd
             else if (line.Contains("cd .."))
             {
-                _dirSizes.Add(currentSize);
+                _dirSizes.Add(directorySize);
 
-                if (currentSize <= 100000)
+                if (directorySize <= 100000)
                 {
-                    _totalA += currentSize;
+                    _totalA += directorySize;
                 }
 
-                return currentSize;
+                return directorySize;
             }
             else if (line.Contains("cd"))
             {
-                currentSize += TraverseDirectories();
+                directorySize += TraverseDirectories();
             }
         }
 
-        return currentSize;
+        return directorySize;
     }
 }
